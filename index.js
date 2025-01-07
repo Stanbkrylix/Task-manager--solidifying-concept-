@@ -6,7 +6,30 @@ import { showNotes, closeAndCreateNotes } from "./note.js";
 
 const tabBtn = document.querySelectorAll(".nav-task");
 const contentSections = document.querySelector(".content-section");
-const noteStorageArray = [];
+
+// with some mock data
+const noteStorageArray = [
+    {
+        title: "Lion",
+        description:
+            "The lion is known as the king of the jungle and is a large carnivorous feline native to Africa and parts of Asia.",
+    },
+    {
+        title: "Elephant",
+        description:
+            "Elephants are the largest land animals on Earth, known for their intelligence, strong social bonds, and iconic trunks.",
+    },
+    {
+        title: "Penguin",
+        description:
+            "Penguins are flightless birds primarily found in the Southern Hemisphere, especially in Antarctica, known for their distinctive black and white plumage.",
+    },
+    {
+        title: "Dolphin",
+        description:
+            "Dolphins are highly intelligent marine mammals known for their playful behavior, echolocation abilities, and social nature.",
+    },
+];
 
 closeAndCreateNotes(noteStorageArray);
 tabBtn.forEach((btn) => {
@@ -16,7 +39,7 @@ tabBtn.forEach((btn) => {
         }
 
         if (btn.classList.contains("note-div")) {
-            showNotes(contentSections);
+            showNotes(contentSections, noteStorageArray);
         }
 
         if (btn.classList.contains("completed-div")) {
