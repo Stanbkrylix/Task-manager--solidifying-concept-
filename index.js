@@ -6,8 +6,9 @@ import { showNotes, closeAndCreateNotes } from "./note.js";
 
 const tabBtn = document.querySelectorAll(".nav-task");
 const contentSections = document.querySelector(".content-section");
+const noteStorageArray = [];
 
-closeAndCreateNotes();
+closeAndCreateNotes(noteStorageArray);
 tabBtn.forEach((btn) => {
     btn.addEventListener("click", (e) => {
         if (btn.classList.contains("task-div")) {

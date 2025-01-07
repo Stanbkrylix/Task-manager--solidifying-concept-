@@ -187,6 +187,14 @@ body {
     border: 1px solid white;
     border-radius: 5px;
     background-color: #222831;
+    text-align: center;
+}
+.card-title {
+    margin-bottom: 5px;
+}
+.card-content {
+    margin-bottom: 8px;
+    font-size: 1rem;
 }
 
 .note-tab button {
@@ -200,6 +208,10 @@ body {
     background-color: #364355;
     color: white;
     cursor: pointer;
+}
+
+.note-tab button:hover {
+    transform: scale(1.02);
 }
 
 /* ========================= Task Modal ================================== */
