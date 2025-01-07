@@ -15,7 +15,7 @@ tabBtn.forEach((btn) => {
         }
 
         if (btn.classList.contains("note-div")) {
-            //
+            showNotes(contentSections);
         }
 
         if (btn.classList.contains("completed-div")) {

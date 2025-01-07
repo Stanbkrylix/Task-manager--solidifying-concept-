@@ -156,6 +156,52 @@ body {
     color: #e9ae0aee;
 }
 
+/* =========== Note section =========================== */
+.note-section {
+    /* padding: 5px; */
+}
+.note-tab {
+    display: flex;
+    margin-bottom: 25px;
+    /* padding-bottom: 5px; */
+    justify-content: space-between;
+    /* border-bottom: 1px solid white; */
+    align-items: end;
+}
+
+.note-cards-section {
+    border-top: 1px solid white;
+    padding-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 100%;
+    /* height: ; */
+}
+
+.note-card {
+    /* flex: 1; */
+    max-width: 250px;
+    /* height: 100px; */
+    padding: 0.5rem;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #222831;
+}
+
+.note-tab button {
+    padding: 5px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #364355;
+    color: white;
+    cursor: pointer;
+}
+
 /* ========================= Task Modal ================================== */
 .main-div {
     position: relative;
@@ -188,9 +234,10 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* ============ notes ============================= */
+/* ============ Notes Modal ============================= */
 
 .note-modal {
+    /* display: none; */
     position: absolute;
     top: 0;
     left: 0;
