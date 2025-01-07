@@ -3,15 +3,84 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
         <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=task"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
         />
+
         <link rel="stylesheet" href="index.css" />
         <title>To Do App</title>
     </head>
     <body>
         <div class="main-div">
+            <!-- task model -->
+            <div id="modal" class="task-modal">
+                <div class="task-modal-content">
+                    <input
+                        type="text"
+                        class="task-title-input"
+                        placeholder="Task Title"
+                    />
+
+                    <div class="task-date-div">
+                        <span class="material-symbols-outlined">
+                            calendar_month
+                        </span>
+                        <input type="date" class="task-todays-date" />
+                    </div>
+
+                    <div class="task-priority-btns-div">
+                        <div class="priority-icon-div">
+                            <span class="material-symbols-outlined">
+                                priority</span
+                            >
+                        </div>
+
+                        <button class="task-priority-btn">Standard</button>
+                        <button class="task-priority-btn">Prioritize</button>
+                        <button class="task-priority-btn">Urgent</button>
+                    </div>
+
+                    <div class="task-description-div">
+                        <textarea
+                            name="task description"
+                            class="task-description-textArea"
+                            placeholder="Task description"
+                        ></textarea>
+                    </div>
+
+                    <div class="task-create-and-delete-btns-div">
+                        <button class="task-cancel-btn">Cancel</button>
+                        <button class="task-create-btn">Create</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="note-modal">
+                <div class="note-modal-content">
+                    <input
+                        type="text"
+                        class="note-modal-title"
+                        placeholder="Note Title"
+                    />
+                    <textarea
+                        name=""
+                        id=""
+                        class="note-modal-description"
+                        placeholder="Note Description"
+                        rows="15"
+                        cols="5"
+                    ></textarea>
+
+                    <div class="note-btns">
+                        <button class="note-cancel-btn">Cancel</button>
+
+                        <button class="note-create-btn">Create Note</button>
+                    </div>
+                </div>
+            </div>
+
             <div class="nav-section">
                 <!--  -->
                 <div class="logo-div">
@@ -39,45 +108,55 @@
                 <!--  -->
 
                 <div class="task-div nav-task">
-                    <img
-                        src="svg/task_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg"
-                        alt="task-button"
-                        srcset=""
-                    />
-                    <p class="task-para">Tasks</p>
+                    <div>
+                        <span class="material-symbols-outlined">task</span>
+                        <p class="tasks-para">Tasks</p>
+                    </div>
                     <span class="task-total">0</span>
                 </div>
                 <!--  -->
 
+                <div class="note-div nav-task">
+                    <div>
+                        <span class="material-symbols-outlined"
+                            >event_note</span
+                        >
+                        <p class="notes-para">Notes</p>
+                    </div>
+                    <span class="Notes-total">0</span>
+                </div>
+                <!--  -->
+
                 <div class="completed-div nav-task">
-                    <img
-                        src="svg/check_circle_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg"
-                        alt="completed-button"
-                        srcset=""
-                    />
-                    <p class="completed-para">Completed</p>
+                    <div>
+                        <span class="material-symbols-outlined"
+                            >check_circle</span
+                        >
+                        <p class="completed-para">Completed</p>
+                    </div>
                     <span class="task-total">0</span>
                 </div>
                 <!--  -->
 
                 <div class="history-div nav-task">
-                    <img
-                        src="svg/history_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg"
-                        alt="history-button"
-                        srcset=""
-                    />
-                    <p class="history-para">History</p>
+                    <div>
+                        <span class="material-symbols-outlined"
+                            >event_note</span
+                        >
+
+                        <p class="history-para">History</p>
+                    </div>
                 </div>
 
                 <!--  -->
 
                 <div class="calendar-div nav-task">
-                    <img
-                        src="svg/calendar_month_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg"
-                        alt="calendar-button"
-                        srcset=""
-                    />
-                    <p class="calendar-para">Calendar</p>
+                    <div>
+                        <span class="material-symbols-outlined"
+                            >calendar_month</span
+                        >
+                        <p class="calendar-para">Calendar</p>
+                    </div>
                     <!-- <span class="task-total">0</span> -->
                 </div>
 
@@ -86,12 +165,10 @@
                 <!--  -->
 
                 <div class="setting-div nav-task">
-                    <img
-                        src="svg/settings_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg"
-                        alt="setting-button"
-                        srcset=""
-                    />
-                    <p class="setting-para">Setting</p>
+                    <div>
+                        <span class="material-symbols-outlined">settings</span>
+                        <p class="setting-para">Setting</p>
+                    </div>
                     <!-- <span class="task-total">0</span> -->
                 </div>
             </div>
@@ -99,4 +176,43 @@
         </div>
         <script type="module" src="index.js"></script>
     </body>
+    <template>
+        <div class="task-section">
+            <div class="task-navbar">
+                <h2>Task</h2>
+
+                <button class="add-task">
+                    <span class="material-symbols-outlined"> add</span>
+                    <p>New Task</p>
+                </button>
+            </div>
+            <div class="task-info">
+                <div class="task-descriptions">
+                    <p>Task list</p>
+                    <p>Date</p>
+                    <p>Priority</p>
+                </div>
+                <ul class="task-list">
+                    <li>
+                        <div class="task-card">
+                            <p class="task-title">Adjust Banner + Content</p>
+                            <p>1.Adjust banner</p>
+                            <p>2.periotic progress reports</p>
+                        </div>
+
+                        <p class="date">June 2,2024</p>
+                        <div class="priority">
+                            <button>Urgent</button>
+                        </div>
+
+                        <input
+                            type="checkbox"
+                            name="completed"
+                            id="complete-checkbox"
+                        />
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </template>
 </html>

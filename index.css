@@ -71,7 +71,194 @@ body {
     margin-bottom: 30px;
 }
 
+/* ================== content section ============================== */
 .content-section {
-    background-color: #0c0c0c;
+    padding: 10px;
+    background-color: #1d2427;
     flex: 2;
+    color: white;
+}
+
+.task-navbar {
+    padding: 5px 0 0 0;
+    margin-bottom: 20px;
+    display: flex;
+}
+.add-task-btn {
+    margin-left: auto;
+    background-color: #364355;
+    color: #fff;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-task-btn:hover {
+    transform: scale(1.05);
+}
+
+.task-descriptions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.task-list li {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ================ task table ================================ */
+
+.task-table {
+    /* border: 1px solid white; */
+    width: 100%;
+    font-size: 1.2rem;
+    text-align: left;
+    border-spacing: 0 10px;
+}
+
+.task-table th {
+    padding-bottom: 10px;
+    border: 1px solid white;
+}
+
+.completed-data-cell,
+.priority-data-cell {
+    text-align: center;
+}
+.priority-btn {
+    padding: 0.4rem;
+    border-radius: 5px;
+    background-color: transparent;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border: 1px solid #04c544c7;
+    color: #04c544c7;
+}
+.priority-btn:hover {
+    opacity: 0.8;
+}
+
+.urgent-color {
+    border: 1px solid #e90a0aee;
+    color: #e90a0aee;
+}
+.standard-color {
+    border: 1px solid #04c544c7;
+    color: #04c544c7;
+}
+.prioritize-color {
+    border: 1px solid #e9ae0aee;
+    color: #e9ae0aee;
+}
+
+/* ========================= Task Modal ================================== */
+.main-div {
+    position: relative;
+}
+
+.task-modal {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-modal-content,
+.note-modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 100px auto;
+    width: 70%;
+    height: 400px;
+    min-height: 200px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* ============ notes ============================= */
+
+.note-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+.note-modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #222831;
+}
+.note-btns {
+    margin-top: auto;
+}
+.note-modal-title {
+    height: 30px;
+    padding: 0.5rem;
+}
+.note-modal-content input,
+textarea {
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #1d2427;
+    color: white;
+}
+.note-modal-content input:focus,
+textarea:focus {
+    outline: none;
+}
+.note-modal-description {
+    padding: 0.5rem;
+    width: 100%;
+    resize: none;
+}
+
+.note-btns {
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.note-btns button {
+    padding: 5px 8px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    /* background-color: #fff; */
+}
+.note-btns button:hover {
+    transform: scale(1.03);
+    /* transition: 200ms; */
+}
+.note-cancel-btn {
+    background-color: #fff;
+    color: #1d2427;
+}
+.note-create-btn {
+    background-color: #364355;
+    color: white;
+}
+
+.hidden {
+    visibility: hidden;
 }
