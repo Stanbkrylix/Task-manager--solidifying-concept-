@@ -1,3 +1,5 @@
+import { v4 as uuid } from "uuid";
+
 const closeAndCreateNotes = function (noteStorageArray) {
     const cancelNoteBtn = document.querySelector(".note-cancel-btn");
     const createNoteBtn = document.querySelector(".note-create-btn");
@@ -18,6 +20,7 @@ const closeAndCreateNotes = function (noteStorageArray) {
 
         if (noteModalTitle.value !== "" && noteModalDescription.value !== "") {
             const noteObject = {
+                id: uuid(),
                 title: noteModalTitle.value,
                 description: noteModalDescription.value,
             };
@@ -27,12 +30,47 @@ const closeAndCreateNotes = function (noteStorageArray) {
             noteModalDescription.value = "";
             noteModal.classList.add("hidden");
             renderNotes(noteCardsSection, noteStorageArray);
+            deleteNotes(noteStorageArray);
 
             console.log(noteStorageArray);
             console.log(noteCardsSection);
         }
     });
 };
+
+// whenever there is a renderNotes a delete notes need to be there
+function deleteNotes(noteStorageArray) {
+    // const noteCardsSection = document.querySelector(".note-cards-section");
+    const noteCardDeleteBtn = document.querySelectorAll(
+        ".note-card-delete-btn"
+    );
+
+    if (!noteCardDeleteBtn) return; // if no delete button exists
+
+    noteCardDeleteBtn.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            // The closest method ensures that any click within the button element is treated as simply a button click
+            console.log(e.target);
+            if (e.target.closest("button") === btn) {
+                const cardToDelete = btn.parentElement.parentElement;
+                const id = cardToDelete.dataset.id;
+
+                const findArrayObject = noteStorageArray.find(
+                    (cardObject) => cardObject.id === id
+                );
+
+                const indexToDelete = noteStorageArray.indexOf(findArrayObject);
+                noteStorageArray.splice(indexToDelete, 1);
+                cardToDelete.remove();
+
+                console.log(cardToDelete);
+                console.log(id);
+
+                console.log(noteStorageArray);
+            }
+        });
+    });
+}
 
 const showNotes = function (contentSection, noteStorageArray) {
     contentSection.innerHTML = "";
@@ -48,14 +86,17 @@ const showNotes = function (contentSection, noteStorageArray) {
         }
     });
 
+    console.log(noteStorageArray);
     renderNotes(noteCardsSection, noteStorageArray);
+    deleteNotes(noteStorageArray);
 };
 
 function renderNotes(noteCardsSection, noteStorageArray) {
+    // const noteCardsSection = document.querySelector(".note-cards-section");
     noteCardsSection.innerHTML = "";
     noteStorageArray.forEach((cardData) => {
         noteCardsSection.innerHTML += `
-            <div class="note-card" data-id="1">
+            <div class="note-card" data-id="${cardData.id}">
                 <h2 class="card-title">${cardData.title}</h2>
                 <p class="card-content">
                     ${cardData.description}
@@ -116,4 +157,4 @@ function regenerateHtml() {
     `;
 }
 
-export { showNotes, closeAndCreateNotes };
+export { showNotes, closeAndCreateNotes, deleteNotes };

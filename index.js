@@ -2,7 +2,7 @@ import { showTasks } from "./task.js";
 import { showCalendar } from "./calendar.js";
 import { showCompleted } from "./completed.js";
 import { showHistory } from "./history.js";
-import { showNotes, closeAndCreateNotes } from "./note.js";
+import { showNotes, closeAndCreateNotes, deleteNotes } from "./note.js";
 import { v4 as uuid } from "uuid";
 
 const tabBtn = document.querySelectorAll(".nav-task");
@@ -23,18 +23,19 @@ const noteStorageArray = [
             "Elephants are the largest land animals on Earth, known for their intelligence, strong social bonds, and iconic trunks.",
     },
     {
+        id: uuid(),
         title: "Penguin",
         description:
             "Penguins are flightless birds primarily found in the Southern Hemisphere, especially in Antarctica, known for their distinctive black and white plumage.",
     },
     {
+        id: uuid(),
         title: "Dolphin",
         description:
             "Dolphins are highly intelligent marine mammals known for their playful behavior, echolocation abilities, and social nature.",
     },
 ];
 
-closeAndCreateNotes(noteStorageArray);
 tabBtn.forEach((btn) => {
     btn.addEventListener("click", (e) => {
         if (btn.classList.contains("task-div")) {
@@ -58,3 +59,6 @@ tabBtn.forEach((btn) => {
         }
     });
 });
+
+closeAndCreateNotes(noteStorageArray);
+// deleteNotes(noteStorageArray);
