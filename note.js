@@ -73,15 +73,27 @@ function deleteNotes(noteStorageArray) {
 
 function editNotes(noteStorageArray) {
     const editButton = document.querySelectorAll(".note-card-edit-btn");
+    const noteCardsSection = document.querySelector(".note-cards-section");
     // const just
 
     editButton.forEach(function (btn) {
         btn.addEventListener("click", (e) => {
             if (e.target.closest("button") === btn) {
                 const cardToEdit = btn.parentElement.parentElement;
-                // cardToEdit
+                const positionOfCard = cardToEdit.dataset.id;
+                const cardSelected = noteStorageArray.find(
+                    (cardObject) => cardObject.id === positionOfCard
+                );
+                const indexOfCard = noteStorageArray.indexOf(cardSelected);
+
                 cardToEdit.classList.toggle("make-card-big");
+                cardToEdit.innerHTML = "";
+                cardToEdit.innerHTML = editHtml(cardSelected);
+
+                // noteCardsSection.classList.toggle("change-cards-flex");
                 console.log(cardToEdit);
+                console.log(positionOfCard);
+                console.log(indexOfCard);
             }
         });
     });
@@ -170,6 +182,34 @@ function regenerateHtml() {
             </div>
         </div>
     
+    `;
+}
+
+function editHtml(cardSelected) {
+    return `
+         <div class="note-edit-content">
+                    <input
+                        type="text"
+                        class="note-edit-title"
+                        placeholder="Note edit Title"
+                        value ="${cardSelected.title}"
+                    />
+                    <textarea
+                        name=""
+                        id=""
+                        class="note-edit-description"
+                        placeholder="Note edit Description"
+                          
+                        rows="11"
+                        cols="5"
+                    > ${cardSelected.description}</textarea>
+
+                    <div class="note-edit-btns">
+                        <button class="note-cancel-edit-btn">Cancel Edit</button>
+
+                        <button class="note-create-edit-btn">Edit Note</button>
+                    </div>
+                </div>
     `;
 }
 
