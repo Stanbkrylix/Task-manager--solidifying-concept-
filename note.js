@@ -50,7 +50,6 @@ function deleteNotes(noteStorageArray) {
     noteCardDeleteBtn.forEach((btn) => {
         btn.addEventListener("click", (e) => {
             // The closest method ensures that any click within the button element is treated as simply a button click
-            console.log(e.target);
             if (e.target.closest("button") === btn) {
                 const cardToDelete = btn.parentElement.parentElement;
                 const id = cardToDelete.dataset.id;
@@ -67,6 +66,22 @@ function deleteNotes(noteStorageArray) {
                 console.log(id);
 
                 console.log(noteStorageArray);
+            }
+        });
+    });
+}
+
+function editNotes(noteStorageArray) {
+    const editButton = document.querySelectorAll(".note-card-edit-btn");
+    // const just
+
+    editButton.forEach(function (btn) {
+        btn.addEventListener("click", (e) => {
+            if (e.target.closest("button") === btn) {
+                const cardToEdit = btn.parentElement.parentElement;
+                // cardToEdit
+                cardToEdit.classList.toggle("make-card-big");
+                console.log(cardToEdit);
             }
         });
     });
@@ -89,6 +104,7 @@ const showNotes = function (contentSection, noteStorageArray) {
     console.log(noteStorageArray);
     renderNotes(noteCardsSection, noteStorageArray);
     deleteNotes(noteStorageArray);
+    editNotes(noteStorageArray);
 };
 
 function renderNotes(noteCardsSection, noteStorageArray) {
