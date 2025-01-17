@@ -1,5 +1,7 @@
 import { v4 as uuid } from "uuid";
 
+let editing = false;
+
 const closeAndCreateNotes = function (noteStorageArray) {
     const cancelNoteBtn = document.querySelector(".note-cancel-btn");
     const createNoteBtn = document.querySelector(".note-create-btn");
@@ -71,14 +73,54 @@ function deleteNotes(noteStorageArray) {
     });
 }
 
+function disableAllBtn() {
+    const noteCardEditBtn = document.querySelectorAll(".note-card-edit-btn");
+    const noteCardDeleteBtn = document.querySelectorAll(
+        ".note-card-delete-btn"
+    );
+    const addNewNote = document.querySelector(".add-note-btn");
+
+    addNewNote.disabled = true;
+
+    noteCardEditBtn.forEach((btn) => {
+        btn.disabled = true;
+    });
+
+    noteCardDeleteBtn.forEach((btn) => {
+        btn.disabled = true;
+    });
+}
+
+function enableAllBtn() {
+    const noteCardEditBtn = document.querySelectorAll(".note-card-edit-btn");
+    const noteCardDeleteBtn = document.querySelectorAll(
+        ".note-card-delete-btn"
+    );
+    const addNewNote = document.querySelector(".add-note-btn");
+
+    addNewNote.disabled = false;
+
+    noteCardEditBtn.forEach((btn) => {
+        btn.disabled = false;
+    });
+
+    noteCardDeleteBtn.forEach((btn) => {
+        btn.disabled = false;
+    });
+}
+
 function editNotes(noteStorageArray) {
     const editButton = document.querySelectorAll(".note-card-edit-btn");
-    const noteCardsSection = document.querySelector(".note-cards-section");
+    // const noteCardsSection = document.querySelector(".note-cards-section");
     // const just
 
     editButton.forEach(function (btn) {
         btn.addEventListener("click", (e) => {
+            if (editing) return;
+
             if (e.target.closest("button") === btn) {
+                editing = true;
+
                 const cardToEdit = btn.parentElement.parentElement;
                 const positionOfCard = cardToEdit.dataset.id;
                 const cardSelected = noteStorageArray.find(
@@ -89,13 +131,32 @@ function editNotes(noteStorageArray) {
                 cardToEdit.classList.toggle("make-card-big");
                 cardToEdit.innerHTML = "";
                 cardToEdit.innerHTML = editHtml(cardSelected);
+                disableAllBtn();
 
-                // noteCardsSection.classList.toggle("change-cards-flex");
+                cancelEdit(noteStorageArray);
+                // editCard()
+
                 console.log(cardToEdit);
                 console.log(positionOfCard);
                 console.log(indexOfCard);
             }
         });
+    });
+}
+
+function cancelEdit(noteStorageArray) {
+    const noteCancelEditBtn = document.querySelector(".note-cancel-edit-btn");
+
+    noteCancelEditBtn.addEventListener("click", (e) => {
+        const noteCardsSection = document.querySelector(".note-cards-section");
+        const parent = e.target.parentElement.parentElement.parentElement;
+        console.log(parent);
+        editing = false;
+
+        enableAllBtn();
+        renderNotes(noteCardsSection, noteStorageArray);
+        deleteNotes(noteStorageArray);
+        editNotes(noteStorageArray);
     });
 }
 
@@ -117,6 +178,7 @@ const showNotes = function (contentSection, noteStorageArray) {
     renderNotes(noteCardsSection, noteStorageArray);
     deleteNotes(noteStorageArray);
     editNotes(noteStorageArray);
+    // cancelEdit();
 };
 
 function renderNotes(noteCardsSection, noteStorageArray) {
