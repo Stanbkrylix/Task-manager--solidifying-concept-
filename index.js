@@ -37,6 +37,10 @@ const noteStorageArray = [
 ];
 
 tabBtn.forEach((btn) => {
+    const notesTotalItems = (document.querySelector(
+        ".Notes-total"
+    ).textContent = noteStorageArray.length);
+
     btn.addEventListener("click", (e) => {
         if (btn.classList.contains("task-div")) {
             showTasks(contentSections);

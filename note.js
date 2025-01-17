@@ -32,7 +32,10 @@ const closeAndCreateNotes = function (noteStorageArray) {
             noteModalDescription.value = "";
             noteModal.classList.add("hidden");
             renderNotes(noteCardsSection, noteStorageArray);
-            deleteNotes(noteStorageArray);
+            const notesTotalItems = (document.querySelector(
+                ".Notes-total"
+            ).textContent = noteStorageArray.length);
+            // deleteNotes(noteStorageArray);
 
             console.log(noteStorageArray);
             console.log(noteCardsSection);
@@ -63,6 +66,9 @@ function deleteNotes(noteStorageArray) {
                 const indexToDelete = noteStorageArray.indexOf(findArrayObject);
                 noteStorageArray.splice(indexToDelete, 1);
                 cardToDelete.remove();
+                const notesTotalItems = (document.querySelector(
+                    ".Notes-total"
+                ).textContent = noteStorageArray.length);
 
                 console.log(cardToDelete);
                 console.log(id);
@@ -129,12 +135,13 @@ function editNotes(noteStorageArray) {
                 const indexOfCard = noteStorageArray.indexOf(cardSelected);
 
                 cardToEdit.classList.toggle("make-card-big");
+                cardToEdit.classList.toggle("border-shadow");
                 cardToEdit.innerHTML = "";
                 cardToEdit.innerHTML = editHtml(cardSelected);
                 disableAllBtn();
 
                 cancelEdit(noteStorageArray);
-                // editCard()
+                saveEdit(noteStorageArray, indexOfCard);
 
                 console.log(cardToEdit);
                 console.log(positionOfCard);
@@ -144,25 +151,50 @@ function editNotes(noteStorageArray) {
     });
 }
 
+function saveEdit(noteStorageArray, index) {
+    const editBtn = document.querySelector(".note-create-edit-btn");
+    const noteCardsSection = document.querySelector(".note-cards-section");
+
+    editBtn.addEventListener("click", (e) => {
+        const noteEditTitle = document.querySelector(".note-edit-title");
+        const noteEditDescription = document.querySelector(
+            ".note-edit-description"
+        );
+
+        if (
+            noteEditTitle.value === "" &&
+            noteEditDescription.textContent === ""
+        )
+            return;
+
+        editing = false;
+        noteStorageArray[index].title = noteEditTitle.value;
+        noteStorageArray[index].description = noteEditDescription.value;
+
+        renderNotes(noteCardsSection, noteStorageArray);
+    });
+}
+
 function cancelEdit(noteStorageArray) {
     const noteCancelEditBtn = document.querySelector(".note-cancel-edit-btn");
 
     noteCancelEditBtn.addEventListener("click", (e) => {
         const noteCardsSection = document.querySelector(".note-cards-section");
         const parent = e.target.parentElement.parentElement.parentElement;
-        console.log(parent);
         editing = false;
 
         enableAllBtn();
         renderNotes(noteCardsSection, noteStorageArray);
-        deleteNotes(noteStorageArray);
-        editNotes(noteStorageArray);
     });
 }
 
 const showNotes = function (contentSection, noteStorageArray) {
     contentSection.innerHTML = "";
     contentSection.innerHTML = regenerateHtml();
+
+    if (editing) {
+        editing = false;
+    }
 
     const addNewNote = document.querySelector(".add-note-btn");
     const noteModal = document.querySelector(".note-modal");
@@ -176,13 +208,14 @@ const showNotes = function (contentSection, noteStorageArray) {
 
     console.log(noteStorageArray);
     renderNotes(noteCardsSection, noteStorageArray);
-    deleteNotes(noteStorageArray);
-    editNotes(noteStorageArray);
+    // deleteNotes(noteStorageArray);
+    // editNotes(noteStorageArray);
     // cancelEdit();
 };
 
 function renderNotes(noteCardsSection, noteStorageArray) {
     // const noteCardsSection = document.querySelector(".note-cards-section");
+    const notesTotalItems = document.querySelector(".Notes-total");
     noteCardsSection.innerHTML = "";
     noteStorageArray.forEach((cardData) => {
         noteCardsSection.innerHTML += `
@@ -204,6 +237,10 @@ function renderNotes(noteCardsSection, noteStorageArray) {
        
        `;
     });
+
+    deleteNotes(noteStorageArray);
+    editNotes(noteStorageArray);
+    notesTotalItems.textContent = noteStorageArray.length;
 }
 
 function regenerateHtml() {
